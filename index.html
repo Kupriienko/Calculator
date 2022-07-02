@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
-    <link href='style1.css' rel='stylesheet'>
-    <script src="calculation.js"></script>
-
+    <link href='calculator.css' rel='stylesheet'>
+    <script type="text/javascript" src="calculation.js"></script>
 </head>
 <body>
-    <input type="number" name="number" id="number" placeholder="0">
-    <button onclick="reset()">AC</button>
-    <br>
-    <button onclick="n7()">7</button>
-    <button onclick="n8()">8</button>
-    <button onclick="n9()">9</button>
-    <button onclick="division()">÷</button>
-    <br>
-    <button onclick="n4()">4</button>
-    <button onclick="n5()">5</button>
-    <button onclick="n6()">6</button>
-    <button onclick="multiplication()">×</button>
-    <br>
-    <button onclick="n1()">1</button>
-    <button onclick="n2()">2</button>
-    <button onclick="n3()">3</button>
-    <button onclick="subtraction()">-</button>
-    <br>
-    <button onclick="n0()">0</button>
-    <button onclick="fraction()">.</button>
-    <button onclick="sum()">=</button>
-    <button onclick="addition()">+</button>
+    <div class="container">
+        <div class="calculator">
+            <input name="num_expression" id="num_expression" placeholder="0">
+            <button class="numbers" onclick="reset()">AC</button>
+            <br>
+            <button id = "7" onclick="number(id)">7</button>
+            <button id = "8" onclick="number(id)">8</button>
+            <button id = "9" onclick="number(id)">9</button>
+            <button onclick="division()">÷</button>
+            <br>
+            <button id = "4" onclick="number(id)">4</button>
+            <button id = "5" onclick="number(id)">5</button>
+            <button id = "6" onclick="number(id)">6</button>
+            <button onclick="multiplication()">×</button>
+            <br>
+            <button id = "1" onclick="number(id)">1</button>
+            <button id = "2" onclick="number(id)">2</button>
+            <button id = "3" onclick="number(id)">3</button>
+            <button onclick="subtraction()">-</button>
+            <br>
+            <button id = "0" onclick="number(id)">0</button>
+            <button onclick="fraction()">.</button>
+            <button onclick="sum()">=</button>
+            <button onclick="addition()">+</button>
+        </div>
+    </div>
 </body>
 </html>
