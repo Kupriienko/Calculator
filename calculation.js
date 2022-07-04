@@ -1,14 +1,17 @@
+function get_input() {
+    return document.getElementById('num_expression');
+}
+
 function number(clicked_id) {
-    document.getElementById('num_expression').value += clicked_id;
+    get_input().value += clicked_id;
 }
 
 function fraction() {
-    if (!(document.getElementById('num_expression').value.includes("."))) {
-        document.getElementById('num_expression').value += ".";
+    if (!(get_input().value.includes(".") || get_input().value.length == 0)) {
+        get_input().value += ".";
     }
 }
 
 function reset() {
-    document.getElementById('num_expression').value = "";
-    document.getElementById('num_expression').placeholder = "0";
+    get_input().value = "0";
 }
