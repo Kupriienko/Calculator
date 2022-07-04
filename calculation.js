@@ -7,7 +7,7 @@ function number(clicked_id) {
 }
 
 function point() {
-    if (!(get_input().value.includes(".") || get_input().value.length == 0)) {
+    if (!(get_input().value.includes(".") || get_input().value === '')) {
         get_input().value += ".";
     }
 }
