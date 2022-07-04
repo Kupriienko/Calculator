@@ -6,7 +6,7 @@ function number(clicked_id) {
     get_input().value += clicked_id;
 }
 
-function fraction() {
+function point() {
     if (!(get_input().value.includes(".") || get_input().value.length == 0)) {
         get_input().value += ".";
     }
