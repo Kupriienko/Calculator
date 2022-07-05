@@ -5,11 +5,13 @@
     <title>Calculator</title>
     <link href='calculator.css' rel='stylesheet'>
     <script type="text/javascript" src="calculation.js"></script>
+    <link rel="icon" type="image/svg+xml" href="/d_course/calculator.svg">
+    <link rel="icon" type="image/png" href="/d_course/calculator.png">
 </head>
 <body>
     <div class="container">
         <div class="calculator">
-            <input name="num_expression" id="num_expression" placeholder="0">
+            <input type = 'text' name="num_expression" onkeypress="return isNumberKey(event);" id="num_expression" placeholder="0">
             <button class="numbers" onclick="reset()">AC</button>
             <br>
             <button id = "7" onclick="number(id)">7</button>
