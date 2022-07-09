@@ -1,117 +1,110 @@
-var allInput = ''
+const DECIMAL_DELIMITER = ".";
+const NULL = "0";
+const PLUS_SIGN = "+"
+const MINUS_SIGN = "-"
+const MULT_SIGN = "*"
+const DIVISION_SIGN = "/"
+const EQUAL_SIGN = "="
+var allInput = [];
 
 function getInput() {
     return document.getElementById("num_expression");
 }
 
-function IsLastElementAction() {
+function isLastElementAction() {
     var lastEl = allInput[allInput.length-1];
-    return (lastEl === "+" || lastEl === "-" || lastEl === "/" || lastEl === "*")
+    return ((lastEl === PLUS_SIGN || lastEl === MINUS_SIGN || lastEl === DIVISION_SIGN || lastEl === MULT_SIGN)
+    && allInput[allInput.length-2] === parseFloat(getInput().value));
 }
 
 function number(clicked_id) {
-    if (IsLastElementAction()) {
+    if (isLastElementAction() || getInput().value === NULL && clicked_id !== NULL) {
         getInput().value = clicked_id;
-        allInput += clicked_id;
-    } else if (getInput().value === "0" && clicked_id !== "0") {
-        getInput().value = clicked_id;
-        allInput = clicked_id;
-    } else if (!((getInput().value === "0" || getInput().value === "") && clicked_id === "0")) {
-        allInput += clicked_id;
+    } else if (!((getInput().value === NULL || getInput().value === "") && clicked_id === NULL)) {
         getInput().value += clicked_id;
     }
-    console.log(allInput)
+}
+
+function calculation(allInput) {
+    var total = allInput[0];
+    for (var el in allInput) {
+        if (allInput[el] === PLUS_SIGN){
+            total += allInput[parseInt(el)+1];
+        } else if (allInput[el] === MINUS_SIGN) {
+            total -= allInput[parseInt(el)+1];
+        } else if (allInput[el] === DIVISION_SIGN) {
+            total /= allInput[parseInt(el)+1];
+        } else if (allInput[el] === MULT_SIGN) {
+            total *= allInput[parseInt(el)+1];
+        }
+    }
+    return total;
 }
 
 function workWithAction(action) {
-    var lastEl = allInput[allInput.length-1]
-    if (lastEl !== "+" && lastEl !== "-" && lastEl !== "/" && lastEl !== "*") {
-        allInput += action;
+    var lastEl = allInput[allInput.length-1];
+    if ((lastEl !== PLUS_SIGN && lastEl !== MINUS_SIGN && lastEl !== DIVISION_SIGN
+    && lastEl !== MULT_SIGN && lastEl !== EQUAL_SIGN)
+    || allInput[allInput.length-2] !== getInput().value) {
+        allInput.push(parseFloat(getInput().value), action);
     }
 }
 
-function action(clicked_id) {
+function action(clicked) {
     if (getInput().value !== "") {
-        if (clicked_id === "add") {
-            workWithAction("+")
-        }
-        if (clicked_id === "div") {
-            workWithAction("/")
-        }
-        if (clicked_id === "sub") {
-            workWithAction("-")
-        }
-        if (clicked_id === "mult") {
-            workWithAction("*")
-        }
-        if (clicked_id === "sum") {
-        getInput().value = math.evaluate(allInput);
-        allInput = getInput().value;
+        workWithAction(clicked);
+        if (clicked === EQUAL_SIGN) {
+            getInput().value = calculation(allInput);
+            allInput = [];
         }
     }
 }
 
 function point() {
-    if (!(getInput().value.includes(".") || getInput().value === "")) {
-        getInput().value += ".";
-        allInput += ".";
+    if (!(getInput().value.includes(DECIMAL_DELIMITER) || getInput().value === "")) {
+        getInput().value += DECIMAL_DELIMITER;
     }
 }
 
 function reset() {
-    getInput().value = "0";
-    allInput = "";
+    getInput().value = NULL;
+    allInput = [];
 }
 
 function isValidKey(evt) {
-    console.log(allInput)
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     var lastEl = allInput[allInput.length-1];
-    if ((charCode === 45 || charCode === 43 || charCode === 42 || charCode === 47 || charCode === 61)
-        && getInput().value !== "") {
-        if (getInput().value !== "") {
-            if (charCode === 43) {
-                workWithAction("+");
-                return false;
-            }
-            if (charCode === 47) {
-                workWithAction("/");
-                return false;
-            }
-            if (charCode === 45) {
-                workWithAction("-");
-                return false;
-            }
-            if (charCode === 42) {
-                workWithAction("*");
-                return false;
-            }
-            if (charCode === 61) {
-                getInput().value = math.evaluate(allInput);
-                allInput = getInput().value;
-                return false;
-            }
+    if (getInput().value !== "") {
+        if (charCode === 43) {
+            workWithAction(PLUS_SIGN);
+            return false;
         }
-    } else if (IsLastElementAction()) {
+        if (charCode === 47) {
+            workWithAction(DIVISION_SIGN);
+            return false;
+        }
+        if (charCode === 45) {
+            workWithAction(MINUS_SIGN);
+            return false;
+        }
+        if (charCode === 42) {
+            workWithAction(MULT_SIGN);
+            return false;
+        }
+        if (charCode === 61) {
+            workWithAction(EQUAL_SIGN)
+            getInput().value = calculation(allInput);
+            allInput = [];
+            return false;
+        }
+    }
+    if ((getInput().value === NULL && !(charCode > 31 && (charCode < 48 || charCode > 57))) || isLastElementAction()) {
         getInput().value = String.fromCharCode(charCode);
-        allInput += String.fromCharCode(charCode);
-        console.log("A")
         return false;
-    } else if (getInput().value === "0" && !(charCode > 31 && (charCode < 48 || charCode > 57))) {
-        console.log("C")
-        allInput = String.fromCharCode(charCode);
-        getInput().value = String.fromCharCode(charCode);
-        return false;
-    } else if (charCode === 46 && !(getInput().value.includes(".") || getInput().value === "")) {
-        console.log("D")
-        allInput += ".";
-        return true;
-    } else if (!(charCode > 31 && (charCode < 48 || charCode > 57))){
-        console.log("E")
-        allInput += String.fromCharCode(charCode);
+    } else if ((charCode === 46 && !(getInput().value.includes(DECIMAL_DELIMITER) || getInput().value === "")) ||
+    !(charCode > 31 && (charCode < 48 || charCode > 57))) {
         return true;
     } else {
-        console.log("G")
         return false;
     }
 }

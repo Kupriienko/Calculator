@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,33 +13,32 @@
     <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="calculator">
             <input type = 'text' name="num_expression" onkeypress="return isValidKey(event);" id="num_expression" placeholder="0">
-            <button class="numbers" onclick="reset()">AC</button>
+            <button onclick="reset()">AC</button>
             <br>
             <button id = "7" onclick="number(id)">7</button>
             <button id = "8" onclick="number(id)">8</button>
             <button id = "9" onclick="number(id)">9</button>
-            <button id = "div" onclick="action(id)">÷</button>
+            <button onclick="action('/')">÷</button>
             <br>
             <button id = "4" onclick="number(id)">4</button>
             <button id = "5" onclick="number(id)">5</button>
             <button id = "6" onclick="number(id)">6</button>
-            <button id = "mult" onclick="action(id)">×</button>
+            <button onclick="action('*')">×</button>
             <br>
             <button id = "1" onclick="number(id)">1</button>
             <button id = "2" onclick="number(id)">2</button>
             <button id = "3" onclick="number(id)">3</button>
-            <button id = "sub" onclick="action(id)">-</button>
+            <button onclick="action('-')">-</button>
             <br>
             <button id = "0" onclick="number(id)">0</button>
             <button onclick="point()">.</button>
-            <button id = "sum" onclick="action(id)">=</button>
-            <button id = "add" onclick="action(id)">+</button>
+            <button onclick="action('=')">=</button>
+            <button onclick="action('+')">+</button>
         </div>
     </div>
 </body>
