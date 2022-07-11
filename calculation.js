@@ -44,7 +44,6 @@ function inputWithoutDivAndMult(components){
 
 function calculation(components) {
     simplComponents = inputWithoutDivAndMult(components);
-    console.log(simplComponents)
     let total = simplComponents[0];
     for (var el in simplComponents) {
         const present = simplComponents[el];
@@ -110,7 +109,7 @@ function isValidKey(evt) {
         if (charCode === 61) {
             workWithAction(EQUAL_SIGN)
             getInput().value = calculation(components);
-            allInput = [];
+            components = [];
             return false;
         }
     }
