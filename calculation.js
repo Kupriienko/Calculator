@@ -12,7 +12,7 @@ function getInput() {
 }
 
 function isLastElementAction() {
-    var lastEl = components[components.length - 1];
+    const lastEl = components[components.length - 1];
     return (([PLUS_SIGN, MINUS_SIGN, DIVISION_SIGN, MULT_SIGN].includes(lastEl))
     && components[components.length - 2] === parseFloat(getInput().value));
 }
@@ -26,8 +26,8 @@ function number(clicked_id) {
 }
 
 function inputWithoutDivAndMult(components) {
-    let simplifiedComponents = [];
-    for (let el in components) {
+    const simplifiedComponents = [];
+    for (const el in components) {
         const previous = components[parseInt(el) - 1];
         const next = components[parseInt(el) + 1];
         const present = components[el];
@@ -44,8 +44,8 @@ function inputWithoutDivAndMult(components) {
 
 function calculation(components) {
     simpleComponents = inputWithoutDivAndMult(components);
-    let total = simpleComponents[0];
-    for (var el in simpleComponents) {
+    const total = simpleComponents[0];
+    for (const el in simpleComponents) {
         const present = simpleComponents[el];
         const next = simpleComponents[parseInt(el) + 1];
         if (present === PLUS_SIGN) {
@@ -58,7 +58,7 @@ function calculation(components) {
 }
 
 function workWithAction(action) {
-    let lastEl = components[components.length - 1];
+    const lastEl = components[components.length - 1];
     if ([PLUS_SIGN, MINUS_SIGN, DIVISION_SIGN, MULT_SIGN, EQUAL_SIGN].includes(lastEl)
     || components[components.length-2] !== getInput().value) {
         components.push(parseFloat(getInput().value), action);
@@ -87,7 +87,7 @@ function reset() {
 }
 
 function isValidKey(evt) {
-    let charCode = (evt.which) ? evt.which : evt.keyCode;
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
     if (getInput().value !== "") {
         if (charCode === 43) {
             workWithAction(PLUS_SIGN);
