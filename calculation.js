@@ -44,7 +44,7 @@ function inputWithoutDivAndMult(components) {
 
 function calculation(components) {
     simpleComponents = inputWithoutDivAndMult(components);
-    const total = simpleComponents[0];
+    let total = simpleComponents[0];
     for (const el in simpleComponents) {
         const present = simpleComponents[el];
         const next = simpleComponents[parseInt(el) + 1];
@@ -87,7 +87,7 @@ function reset() {
 }
 
 function isValidKey(evt) {
-    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    let charCode = (evt.which) ? evt.which : evt.keyCode;
     if (getInput().value !== "") {
         if (charCode === 43) {
             workWithAction(PLUS_SIGN);
