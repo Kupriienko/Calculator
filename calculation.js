@@ -87,7 +87,7 @@ function reset() {
 }
 
 function isValidKey(evt) {
-    let charCode = (evt.which) ? evt.which : evt.keyCode;
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
     if (getInput().value !== "") {
         if (charCode === 43) {
             workWithAction(PLUS_SIGN);
