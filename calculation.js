@@ -25,16 +25,16 @@ function number(clicked_id) {
     }
 }
 
-function inputWithoutDivAndMult(components){
+function inputWithoutDivAndMult(components) {
     let simplifiedComponents = [];
     for (let el in components) {
         const previous = components[parseInt(el) - 1];
         const next = components[parseInt(el) + 1];
         const present = components[el];
         if (present === DIVISION_SIGN) {
-            simplifiedComponents.push(previous/next);
+            simplifiedComponents.push(previous / next);
         } else if (present === MULT_SIGN) {
-            simplifiedComponents.push(previous*next);
+            simplifiedComponents.push(previous * next);
         } else if (![MULT_SIGN, DIVISION_SIGN].includes(next) && ![MULT_SIGN, DIVISION_SIGN].includes(previous)) {
             simplifiedComponents.push(components[parseInt(el)]);
         }
@@ -43,12 +43,12 @@ function inputWithoutDivAndMult(components){
 }
 
 function calculation(components) {
-    simplComponents = inputWithoutDivAndMult(components);
-    let total = simplComponents[0];
-    for (var el in simplComponents) {
-        const present = simplComponents[el];
-        const next = simplComponents[parseInt(el) + 1];
-        if (present === PLUS_SIGN){
+    simpleComponents = inputWithoutDivAndMult(components);
+    let total = simpleComponents[0];
+    for (var el in simpleComponents) {
+        const present = simpleComponents[el];
+        const next = simpleComponents[parseInt(el) + 1];
+        if (present === PLUS_SIGN) {
             total += next;
         } else if (present === MINUS_SIGN) {
             total -= next;
@@ -88,7 +88,6 @@ function reset() {
 
 function isValidKey(evt) {
     let charCode = (evt.which) ? evt.which : evt.keyCode;
-    let lastEl = components[components.length - 1];
     if (getInput().value !== "") {
         if (charCode === 43) {
             workWithAction(PLUS_SIGN);
